@@ -1,0 +1,82 @@
+<!--*****************************************************************************************
+* Component Name : MultipleColumnRecordPage
+*********************************************************************************************-->
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" 
+                access="global" 
+                controller = "MultipleColumnRecordPageController">
+	
+    <aura:attribute name = "cardTitle" type = "string" access = "global" />
+    <aura:attribute name = "fieldsetName" type = "string" />
+    <aura:attribute name = "fieldsList" type = "String[]" />
+    <aura:attribute name = "renderRecordViewForm" type = "Boolean" />
+    <aura:attribute name = "renderRecordEditForm" type = "Boolean" />
+    <aura:attribute name = "iconUrl" type = "string" access = "global" />
+    <aura:attribute name = "numOfColumns" type = "String" default = "3" />
+    <aura:attribute name = "recordId" type = "String" />
+    <aura:attribute name = "sObjectName" type = "String" />
+    <aura:attribute name = "viewModeColStyle" type = "String" />
+    <aura:attribute name = "editModeColStyle" type = "String" />
+    
+    <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}" />
+
+  	<div class = "container">
+        <lightning:card title = "{!v.cardTitle+' '+'Details'}" iconName = "{!v.iconUrl}">
+            <aura:set attribute = "actions">
+                <div class = "slds-no-flex slds-p-bottom_small">
+                    <aura:if isTrue = "{!v.renderRecordViewForm}">
+                    	<lightning:button label = "Edit" 
+                                          title = "Edit" 
+                                          variant = "brand" 
+                                          value = "{!v.recordId}"
+                                          onclick = "{!c.editRecord }" />
+                    </aura:if>
+                </div>
+            </aura:set>
+			<!-- Display Record form - View mode-->
+            <aura:if isTrue = "{!v.renderRecordViewForm}">
+                <div>
+                    <lightning:recordViewForm recordId="{!v.recordId}" objectApiName="{!v.sObjectName}">
+                        <div class="slds-grid slds-wrap">
+                            <aura:iteration items="{!v.fieldsList}" var="item">
+                                <div class="{!v.viewModeColStyle}" >
+                                    <lightning:outputField fieldName="{!item.key}" class="slds-border_bottom slds-m-left_small"/>
+                                    <aura:if isTrue = "{!item.value != 'readonly'}">
+                                        <lightning:buttonIcon iconName="utility:edit" variant="bare" onclick="{! c.editRecord }" alternativeText="Edit" class="slds-m-right_small editIcon" />                                    
+                                        <aura:set attribute = "else">
+                                            <div class="slds-m-right_small editIcon" style="margin-left:15px;"></div>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                            </aura:iteration>
+                        </div>
+                    </lightning:recordViewForm>
+                </div>
+            </aura:if>
+            <!-- Display Record form - Edit mode-->
+            <aura:if isTrue = "{!v.renderRecordEditForm}">
+                <div>
+                    <lightning:recordEditForm recordId="{!v.recordId}" objectApiName="{!v.sObjectName}" aura:id="editForm">
+                        <div class="slds-grid slds-wrap">
+                            <aura:iteration items="{!v.fieldsList}" var="item">
+                                <div class="{!v.editModeColStyle}" >
+                                    <aura:if isTrue = "{!item.value == 'updateable'}">
+                                    	<lightning:inputField aura:id="field" fieldName="{!item.key}" class="slds-m-left_small slds-m-right_small"/>
+                                        <aura:set attribute = "else">
+                                            <div class='slds-list_horizontal'>
+                                                <lightning:outputField fieldName="{!item.key}" class="slds-border_bottom slds-m-left_small slds-m-right_small"/>
+                                            </div>
+                                        </aura:set>
+                                    </aura:if>
+                                </div>
+                            </aura:iteration>
+                        </div>
+                        <div class="slds-m-top_medium buttonArea">
+                            <lightning:button label="Cancel" onclick="{!c.handleCancel}"/>
+                            <lightning:button type="submit" label="Save" onclick="{!c.handleSave}" variant = "brand"/>
+                        </div>
+                    </lightning:recordEditForm>
+                </div>
+            </aura:if>
+        </lightning:card>
+   </div>
+</aura:component>

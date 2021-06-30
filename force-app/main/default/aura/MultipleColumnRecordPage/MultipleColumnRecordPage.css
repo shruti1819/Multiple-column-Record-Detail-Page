@@ -1,0 +1,18 @@
+.THIS {
+}
+.THIS .slds-border_bottom{
+	width: unset;
+    flex-basis: 100%;
+	font-weight: bolder; 
+    color: rgb(176, 173, 171);
+}
+.THIS .slds-form-element_stacked{
+	width: unset;
+    flex-basis: 100%;    
+}
+.THIS .buttonArea {
+    text-align: center;
+}
+.THIS .editIcon {
+    color: rgb(176, 173, 171);
+}
