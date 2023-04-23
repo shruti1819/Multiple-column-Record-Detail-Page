@@ -21,7 +21,7 @@
     <aura:handler name = "init" value = "{!this}" action = "{!c.doInit}" />
 
   	<div class = "container">
-        <lightning:card title = "{!v.cardTitle+' '+'Details'}" iconName = "{!v.iconUrl}">
+        <lightning:card title = "{!v.labelName}" iconName = "{!v.iconUrl}">
             <aura:set attribute = "actions">
                 <div class = "slds-no-flex slds-p-bottom_small">
                     <aura:if isTrue = "{!v.renderRecordViewForm}">
