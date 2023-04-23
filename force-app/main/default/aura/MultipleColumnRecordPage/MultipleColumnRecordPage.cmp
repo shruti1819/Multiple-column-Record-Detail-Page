@@ -6,6 +6,7 @@
                 controller = "MultipleColumnRecordPageController">
 	
     <aura:attribute name = "cardTitle" type = "string" access = "global" />
+    <aura:attribute name = "labelName" type = "string" />
     <aura:attribute name = "fieldsetName" type = "string" />
     <aura:attribute name = "fieldsList" type = "String[]" />
     <aura:attribute name = "renderRecordViewForm" type = "Boolean" />
