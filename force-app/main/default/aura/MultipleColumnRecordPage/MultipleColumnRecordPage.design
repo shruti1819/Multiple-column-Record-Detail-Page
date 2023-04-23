@@ -1,4 +1,4 @@
-<!--Configuration options to Number of Columns and Field Set Name-->
+<!--Configuration options in Lightning Page Edito-->
 <design:component>
     <design:attribute name = "labelName" label = "Label" />
     <design:attribute name = "fieldsetName" label = "Enter FieldSet Name" />
