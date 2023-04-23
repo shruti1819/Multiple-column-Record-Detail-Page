@@ -1,6 +1,6 @@
 <!--Configuration options in Lightning Page Edito-->
 <design:component>
-    <design:attribute name = "labelName" label = "Label" />
+    <design:attribute name = "labelName" label = "Label" default = "Record Details"/>
     <design:attribute name = "fieldsetName" label = "Enter FieldSet Name" />
     <design:attribute name = "numOfColumns" label = "Enter Number of Columns" datasource="1,2,3,4,5,6,7,8,12" default="3" />
 </design:component>
